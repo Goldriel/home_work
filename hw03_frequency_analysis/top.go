@@ -15,7 +15,7 @@ var re = regexp.MustCompile(`\s{2,}|\t{2,}|\n+`)
 
 func Top10(str string) []string {
 	// Place your code here.
-	var dict = make(map[string]int)
+	dict := make(map[string]int)
 	var list []string
 	var endList []string
 	d := make([]Dict, 0)
