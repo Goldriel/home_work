@@ -43,9 +43,51 @@ var text = `Как видите, он  спускается  по  лестни�
 	посидеть у огня и послушать какую-нибудь интересную сказку.
 		В этот вечер...`
 
+var ruPangramma = "Съешь ещё этих мягких французских булок, да выпей же чаю"
+
+var readMeTest = "cat and dog, one dog,two cats and one man"
+
 func TestTop10(t *testing.T) {
 	t.Run("no words in empty string", func(t *testing.T) {
 		require.Len(t, Top10(""), 0)
+	})
+
+	t.Run("One word", func(t *testing.T) {
+		expected := []string{"one"}
+		require.Equal(t, expected, Top10("one"))
+	})
+
+	t.Run("ruPangramma", func(t *testing.T) {
+		if !taskWithAsteriskIsCompleted {
+			expected := []string{
+				"Съешь",
+				"булок,",
+				"выпей",
+				"да",
+				"ещё",
+				"же",
+				"мягких",
+				"французских",
+				"чаю",
+				"этих",
+			}
+			require.Equal(t, expected, Top10(ruPangramma))
+		}
+	})
+
+	t.Run("readMeTest", func(t *testing.T) {
+		if !taskWithAsteriskIsCompleted {
+			expected := []string{
+				"and",
+				"one",
+				"cat",
+				"cats",
+				"dog,",
+				"dog,two",
+				"man",
+			}
+			require.Equal(t, expected, Top10(readMeTest))
+		}
 	})
 
 	t.Run("positive test", func(t *testing.T) {
