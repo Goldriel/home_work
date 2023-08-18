@@ -18,7 +18,7 @@ func Top10(str string) []string {
 	var dict = make(map[string]int)
 	var list []string
 	var endList []string
-	d := make([]Dict, 10)
+	d := make([]Dict, 0)
 
 	if str == "" {
 		return nil
@@ -41,7 +41,7 @@ func Top10(str string) []string {
 	}
 
 	sort.Slice(d, func(i, j int) bool {
-		return d[i].Count > d[j].Count
+		return d[i].Count > d[j].Count || (d[i].Count == d[j].Count && d[i].Word < d[j].Word)
 	})
 
 	for i := 0; ; i++ {
@@ -50,6 +50,5 @@ func Top10(str string) []string {
 		}
 		endList = append(endList, d[i].Word)
 	}
-
 	return endList
 }
